@@ -14,6 +14,7 @@ export default function Post({
     contentHtml: string
   }
 }) {
+  // let contentHtml = 
   return (
     <Layout>
       <Head>

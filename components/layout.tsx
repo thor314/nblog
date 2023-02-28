@@ -1,26 +1,30 @@
+// Layout is used as the global default layout for the site.
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from './layout.module.scss'
 import utilStyles from '../styles/utils.module.scss'
 import Link from 'next/link'
 
-const name = '[Your Name]'
-export const siteTitle = 'Next.js Sample Website'
+const name = 'Thor'
+export const siteTitle = 'Discrete Blog'
 
+// render the header with favicon and meta site description for SEO
 export default function Layout({
   children,
   home
 }: {
+  // page-specific contents
   children: React.ReactNode
   home?: boolean
 }) {
   return (
     <div className={styles.container}>
+      {/* mostly SEO */}
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta
           name="description"
-          content="Learn how to build a personal website using Next.js"
+          content="Thoughts on mostly cryptography"
         />
         <meta
           property="og:image"
@@ -31,8 +35,10 @@ export default function Layout({
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
+      {/* if home page, render profile pic */}
       <header className={styles.header}>
         {home ? (
+          // if home, render profile pic
           <>
             <Image
               priority
@@ -45,6 +51,7 @@ export default function Layout({
             <h1 className={utilStyles.heading2Xl}>{name}</h1>
           </>
         ) : (
+          // if not home, render back to home link, and smaller profile pic
           <>
             <Link href="/">
               <Image
@@ -64,7 +71,9 @@ export default function Layout({
           </>
         )}
       </header>
+      {/* render page info */}
       <main>{children}</main>
+      {/* if not on home page, render back-to-home button */}
       {!home && (
         <div className={styles.backToHome}>
           <Link href="/">← Back to home</Link>
